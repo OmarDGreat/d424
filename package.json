@@ -11,6 +11,7 @@
     "seed": "cd backend && npm run seed",
     "build-all": "cd backend && npm run seed && cd ../frontend && npm run build"
 
+
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.1",
