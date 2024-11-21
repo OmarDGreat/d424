@@ -8,8 +8,8 @@
     "install-all": "npm run install-backend && npm run install-frontend",
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install",
-    "build-all": "cd backend && npm run seed && cd ../frontend && npm run build"
-
+    "seed": "cd backend && npm run seed",
+    "build-all": "npm run seed && cd frontend && npm run build"
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.1",
