@@ -48,16 +48,17 @@ const seedProducts = [
 
 const seedDatabase = async () => {
   try {
-    console.log('Clearing existing products...');
-    await Product.deleteMany(); // Clear existing data
-
-    console.log('Seeding new products...');
-    await Product.insertMany(seedProducts); // Insert seed data
-
-    console.log('Database seeded with products!');
-    process.exit();
+    if (process.env.RUN_SEED === 'true') {
+      console.log('Seeding database...');
+      await Product.deleteMany(); // Clear existing data
+      await Product.insertMany(seedProducts); // Insert new data
+      console.log('Database seeded successfully!');
+    } else {
+      console.log('Skipping seeding process.');
+    }
+    process.exit(0);
   } catch (error) {
-    console.error(`Error seeding database: ${error.message}`);
+    console.error('Error seeding database:', error.message);
     process.exit(1);
   }
 };
