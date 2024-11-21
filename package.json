@@ -9,7 +9,7 @@
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install",
     "seed": "cd backend && npm run seed",
-    "build-all": "cd backend && npm run seed && cd ../frontend && npm run build"
+    "build-all": "cd frontend && npm run && npm run seed"
 
 
   },
