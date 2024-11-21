@@ -8,8 +8,9 @@
     "install-all": "npm run install-backend && npm run install-frontend",
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install",
+    "build-all": "npm run seed && npm run build",
     "seed": "cd backend && npm run seed",
-    "build-all": "cd frontend && npm run && npm run seed"
+    "build": "cd frontend && npm run build"
 
 
   },
