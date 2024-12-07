@@ -80,20 +80,29 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                 </div>
               </div>
             ) : (
-              <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link is-capitalized">
-                  Welcome, {username || 'User'}
-                </a>
-                <div className="navbar-dropdown is-right">
-                  <Link className="navbar-item" to="/profile">
-                    My Profile
-                  </Link>
-                  <hr className="navbar-divider" />
-                  <button className="navbar-item button is-danger is-fullwidth" onClick={handleLogout}>
-                    Logout
-                  </button>
+              <>
+                {/* Dropdown Menu for Authenticated Users */}
+                <div className="navbar-item has-dropdown is-hoverable">
+                  <a className="navbar-link is-capitalized">
+                    Welcome, {username || 'User'}
+                  </a>
+                  <div className="navbar-dropdown is-right">
+                    <Link className="navbar-item" to="/profile">
+                      My Profile
+                    </Link>
+                    <Link className="navbar-item" to="/orders">
+                      My Orders
+                    </Link>
+                    <hr className="navbar-divider" />
+                    <button
+                      className="navbar-item button is-danger is-fullwidth"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
         </div>

@@ -4,6 +4,9 @@ import Order from '../models/Order.js';
 export const createOrder = async (req, res) => {
   const { orderItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
+  console.log("Received Order Data:", req.body); // Log request body
+  console.log("User Data:", req.user); // Log user information
+  
   if (!orderItems || orderItems.length === 0) {
     return res.status(400).json({ message: 'No order items' });
   }

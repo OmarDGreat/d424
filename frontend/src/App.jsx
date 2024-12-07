@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
+import OrderPage from './pages/OrderPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage'; // Import ProfilePage
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/signup" element={<SignupPage setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/profile" element={<ProfilePage />} /> 
+        <Route path="/orders" element={<OrderPage />} />
       </Routes>
     </Router>
   );
