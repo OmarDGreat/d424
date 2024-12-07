@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link for routing
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -48,9 +48,9 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       <div className="container">
         {/* Brand Section */}
         <div className="navbar-brand">
-          <a className="navbar-item is-size-4 has-text-weight-bold" href="/">
+          <Link className="navbar-item is-size-4 has-text-weight-bold" to="/">
             Ecommerce
-          </a>
+          </Link>
           <a
             role="button"
             className={`navbar-burger ${isBurgerOpen ? 'is-active' : ''}`}
@@ -71,12 +71,12 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
             {!isAuthenticated ? (
               <div className="navbar-item">
                 <div className="buttons">
-                  <a className="button is-light is-rounded" href="/login">
+                  <Link className="button is-light is-rounded" to="/login">
                     Log in
-                  </a>
-                  <a className="button is-primary is-rounded" href="/signup">
+                  </Link>
+                  <Link className="button is-primary is-rounded" to="/signup">
                     Sign up
-                  </a>
+                  </Link>
                 </div>
               </div>
             ) : (
@@ -85,9 +85,9 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                   Welcome, {username || 'User'}
                 </a>
                 <div className="navbar-dropdown is-right">
-                  <a className="navbar-item" href="/profile">
+                  <Link className="navbar-item" to="/profile">
                     My Profile
-                  </a>
+                  </Link>
                   <hr className="navbar-divider" />
                   <button className="navbar-item button is-danger is-fullwidth" onClick={handleLogout}>
                     Logout
