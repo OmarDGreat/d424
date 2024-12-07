@@ -21,6 +21,10 @@ const OrderList = () => {
         fetchOrders();
     }, []);
 
+    const calculateTotalQuantity = (orderItems) => {
+        return orderItems.reduce((total, item) => total + item.quantity, 0);
+    };
+
     if (loading) {
         return <p>Loading orders...</p>;
     }
@@ -41,6 +45,7 @@ const OrderList = () => {
                             <th>Order ID</th>
                             <th>Date</th>
                             <th>Total Price</th>
+                            <th>Quantity</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -50,6 +55,7 @@ const OrderList = () => {
                                 <td>{order._id}</td>
                                 <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                                 <td>${order.totalPrice.toFixed(2)}</td>
+                                <td>{calculateTotalQuantity(order.orderItems)}</td>
                                 <td>
                                     {order.isDelivered
                                         ? 'Delivered'
