@@ -25,4 +25,3 @@ export const fetchProductById = async (id) => {
   }
 };
 
-console.log('API_URL:', API_URL);
