@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../services/productService';
 import ProductCard from './ProductCard';
+import SearchFilter from './SearchFilter'; // Import the SearchFilter component
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]); // Original product list
+  const [filteredProducts, setFilteredProducts] = useState([]); // Filtered product list
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -11,7 +13,9 @@ const ProductList = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts();
-        setProducts(data.products || data); // Adjust for backend response format
+        const productData = data.products || data; // Adjust for backend response format
+        setProducts(productData);
+        setFilteredProducts(productData); // Initially set filtered products to all products
       } catch (error) {
         console.error('Error fetching products:', error);
         setError('Failed to load products.');
@@ -22,6 +26,18 @@ const ProductList = () => {
 
     loadProducts();
   }, []);
+
+  // Handle search query
+  const handleSearch = (query) => {
+    if (!query) {
+      setFilteredProducts(products); // Reset to original product list if query is empty
+    } else {
+      const filtered = products.filter((product) =>
+        product.name.toLowerCase().includes(query.toLowerCase()) // Case-insensitive search
+      );
+      setFilteredProducts(filtered);
+    }
+  };
 
   if (loading) {
     return (
@@ -49,13 +65,15 @@ const ProductList = () => {
   return (
     <div className="container mt-5">
       <h1 className="title has-text-centered">Our Products</h1>
-      {products.length === 0 ? (
+      {/* Include SearchFilter component */}
+      <SearchFilter onSearch={handleSearch} />
+      {filteredProducts.length === 0 ? (
         <div className="has-text-centered">
-          <p>No products available at the moment.</p>
+          <p>No products match your search criteria.</p>
         </div>
       ) : (
         <div className="columns is-multiline is-variable is-8">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div className="column is-one-third" key={product._id}>
               <ProductCard product={product} />
             </div>
