@@ -24,3 +24,5 @@ export const fetchProductById = async (id) => {
     throw error;
   }
 };
+
+console.log('API_URL:', API_URL);
