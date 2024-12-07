@@ -6,7 +6,7 @@ export const createOrder = async (req, res) => {
 
   console.log("Received Order Data:", req.body); // Log request body
   console.log("User Data:", req.user); // Log user information
-  
+
   if (!orderItems || orderItems.length === 0) {
     return res.status(400).json({ message: 'No order items' });
   }
@@ -21,10 +21,13 @@ export const createOrder = async (req, res) => {
     });
 
     const createdOrder = await order.save();
+    // console.log("Order to Save:", order);
+
     res.status(201).json(createdOrder);
   } catch (error) {
     res.status(500).json({ message: 'Failed to create order', error });
   }
+
 };
 
 // Get logged-in user's orders
@@ -37,7 +40,6 @@ export const getMyOrders = async (req, res) => {
   }
 };
 
-// Get all orders (Admin only)
 export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find({}).populate('user', 'id name email');

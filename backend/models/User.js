@@ -15,12 +15,7 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
+    }
   },
   {
     timestamps: true, // Automatically manage createdAt and updatedAt fields

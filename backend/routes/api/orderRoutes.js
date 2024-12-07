@@ -5,7 +5,6 @@ import {
   getAllOrders,
 } from "../../controllers/orderController.js";
 import protect from "../../middleware/authMiddleware.js";
-import isAdmin from "../../middleware/adminMiddleware.js";
 
 const router = express.Router();
 
@@ -13,7 +12,6 @@ const router = express.Router();
 router.post("/", protect, createOrder); // Create an order
 router.get("/my-orders", protect, getMyOrders); // Get logged-in user's orders
 
-// Admin Routes
-router.get("/", protect, isAdmin, getAllOrders); // Get all orders (admin only)
+router.get("/", protect, getAllOrders); 
 
 export default router;
