@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -18,7 +20,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
         },
       };
 
-      const { data } = await axios.get('http://localhost:5000/api/users/profile', config);
+      const { data } = await axios.get(`${API_URL}/api/users/profile`, config);
       setUsername(data.name);
     } catch (error) {
       console.error('Failed to fetch username:', error);

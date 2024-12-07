@@ -7,6 +7,7 @@ import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage'; // Import ProfilePage
 import Navbar from './components/Navbar';
 
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 

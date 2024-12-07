@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+
 const ProfilePage = () => {
   const [userData, setUserData] = useState({
     name: "",
@@ -30,7 +33,7 @@ const ProfilePage = () => {
         };
 
         const { data } = await axios.get(
-          "http://localhost:5000/api/users/profile",
+          `${API_URL}/api/users/profile`,
           config
         );
         setUserData({ name: data.name, email: data.email, password: "" }); // Don't load password for security
@@ -56,7 +59,7 @@ const ProfilePage = () => {
       };
 
       const { data } = await axios.put(
-        "http://localhost:5000/api/users/profile",
+        `${API_URL}/api/users/profile`,
         {
           name: userData.name,
           email: userData.email,
@@ -89,7 +92,7 @@ const ProfilePage = () => {
         },
       };
 
-      await axios.delete("http://localhost:5000/api/users/profile", config);
+      await axios.delete(`${API_URL}/api/users/profile`, config);
       localStorage.removeItem("token");
       alert("Your account has been deleted.");
       navigate("/signup");

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const LoginPage = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,10 +14,18 @@ const LoginPage = ({ setIsAuthenticated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
+
+      // Extract the token from the response
+      const { token } = response.data;
+
+      // Store the token in localStorage
+      localStorage.setItem("token", token);
+
+
       setIsAuthenticated(true);
       setError(""); // Clear error on success
       navigate("/"); // Redirect to the homepage
