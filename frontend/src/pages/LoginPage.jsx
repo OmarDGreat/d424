@@ -25,12 +25,18 @@ const LoginPage = ({ setIsAuthenticated }) => {
       // Store the token in localStorage
       localStorage.setItem("token", token);
 
-
       setIsAuthenticated(true);
       setError(""); // Clear error on success
       navigate("/"); // Redirect to the homepage
     } catch (error) {
-      setError(error.response?.data?.message || "Login failed");
+      // Enhanced error handling
+      if (error.response?.data?.message) {
+        setError(error.response.data.message); // Server-side error message
+      } else if (error.message === "Network Error") {
+        setError("Network error. Please try again.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
@@ -73,10 +79,19 @@ const LoginPage = ({ setIsAuthenticated }) => {
               </div>
             </div>
             {error && (
-              <p className="has-text-danger has-text-centered">{error}</p>
+              <p
+                className="has-text-danger has-text-centered"
+                role="alert" // Add role for accessibility
+              >
+                {error}
+              </p>
             )}
             <div className="field">
-              <button className="button is-primary is-fullwidth" type="submit">
+              <button
+                className="button is-primary is-fullwidth"
+                type="submit"
+                disabled={!email || !password} // Disable button if inputs are empty
+              >
                 Login
               </button>
             </div>

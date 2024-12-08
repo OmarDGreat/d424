@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const SignupPage = ({ setIsAuthenticated }) => {
   const [name, setName] = useState("");
@@ -20,6 +20,8 @@ const SignupPage = ({ setIsAuthenticated }) => {
         email,
         password,
       });
+
+      localStorage.setItem("token", response.data.token);
       setIsAuthenticated(true);
       setError(""); // Clear error on success
       navigate("/"); // Redirect to the homepage
@@ -83,10 +85,16 @@ const SignupPage = ({ setIsAuthenticated }) => {
               </div>
             </div>
             {error && (
-              <p className="has-text-danger has-text-centered">{error}</p>
+              <p className="has-text-danger has-text-centered" role="alert">
+                {error}
+              </p>
             )}
             <div className="field">
-              <button className="button is-primary is-fullwidth" type="submit">
+              <button
+                className="button is-primary is-fullwidth"
+                type="submit"
+                disabled={!name || !email || !password}
+              >
                 Sign Up
               </button>
             </div>
