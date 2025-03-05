@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema(
   {
@@ -22,6 +22,17 @@ const productSchema = mongoose.Schema(
     category: {
       type: String,
       required: true,
+      enum: [
+        "CPU",
+        "GPU",
+        "Motherboard",
+        "RAM",
+        "Storage",
+        "PSU",
+        "Case",
+        "Monitor",
+        "Peripherals",
+      ],
     },
     brand: {
       type: String,
@@ -32,9 +43,18 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    specifications: {
+      type: Map,
+      of: mongoose.Schema.Types.Mixed,
+      required: true,
+    },
+    productUrl: String, // Link to the original product
+    sku: String,
+    manufacturer: String,
+    releaseDate: Date,
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // Relates to the user who created the product
+      ref: "User", // Relates to the user who created the product
     },
   },
   {
@@ -42,6 +62,6 @@ const productSchema = mongoose.Schema(
   }
 );
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 export default Product;

@@ -1,4 +1,5 @@
 import Product from '../models/Product.js';
+import { fetchAndUpdateProducts } from '../services/productDataService.js';
 
 // Get all products
 export const getProducts = async (req, res) => {
@@ -70,5 +71,14 @@ export const deleteProduct = async (req, res) => {
     res.status(200).json({ message: 'Product deleted' });
   } catch (error) {
     res.status(500).json({ message: 'Failed to delete product', error });
+  }
+};
+
+export const updateProductData = async (req, res) => {
+  try {
+    await fetchAndUpdateProducts();
+    res.status(200).json({ message: 'Product data updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update product data', error });
   }
 };
