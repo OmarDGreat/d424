@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -7,9 +8,9 @@ const Hero = () => {
       style={{
         backgroundImage:
           'url("https://www.computersciencedegreehub.com/wp-content/uploads/2020/04/What-is-E-Commerce.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        color: '#fff',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        color: "#fff",
       }}
     >
       <div className="hero-body">
@@ -17,25 +18,31 @@ const Hero = () => {
           {/* Hero Title */}
           <h1
             className="title has-text-weight-bold is-size-1"
-            style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)' }}
+            style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)" }}
           >
             Your One-Stop Computer Hardware Shop
           </h1>
           {/* Hero Subtitle */}
           <h2
             className="subtitle is-size-4"
-            style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.6)' }}
+            style={{ textShadow: "1px 1px 3px rgba(0, 0, 0, 0.6)" }}
           >
             Top-notch components at unbeatable prices
           </h2>
           {/* Call to Action */}
           <div className="buttons is-centered mt-5">
-            <button className="button is-link is-large has-text-weight-semibold">
+            <Link
+              to="/products"
+              className="button is-link is-large has-text-weight-semibold"
+            >
               Shop Now
-            </button>
-            <button className="button is-light is-large has-text-weight-semibold">
+            </Link>
+            <Link
+              to="/categories"
+              className="button is-light is-large has-text-weight-semibold"
+            >
               Browse Categories
-            </button>
+            </Link>
           </div>
         </div>
       </div>
